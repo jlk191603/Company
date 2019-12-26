@@ -1,3 +1,5 @@
+
+
 public class Main {
     public static void main(String[] args) {
         List<Company> salary = new ArrayList<>();
@@ -5,12 +7,25 @@ public class Main {
         Operator operator = new Operator();
         Manager manager = new Manager();
         TopManager topManager = new TopManager();
-        Company company = new Company();
 
         manager.hireAll(10);
         manager.hireAll(5);
         topManager.hire();
-
-        company.getAllSalary(salary);
+        
+        List<? extends Company> companies = new ArrayList<>();
+        companies.add(operator);
+        companies.add(manager);
+        companies.add(topManager);
+      
+        List<Double> allSalary = getAllSalary(companies);
     }
+    
+    private List<Double> getAllSalary(List<? extends Company> companies){
+        List<Double> res = new ArrayList<>();
+        for(Company company: companies){
+            res.add(company.getMonthSalary());
+        }
+        return res;
+    }
+    
 }
